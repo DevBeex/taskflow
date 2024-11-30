@@ -51,6 +51,14 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.wso2.orbit.org.mapstruct/mapstruct -->
+		<dependency>
+			<groupId>org.wso2.orbit.org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.4.1.wso2v1</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

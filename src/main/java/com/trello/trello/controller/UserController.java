@@ -1,14 +1,13 @@
 package com.trello.trello.controller;
 
-import com.trello.trello.model.User;
+import com.trello.trello.dto.users.UserRequestDto;
+import com.trello.trello.dto.users.UserResponseDto;
 import com.trello.trello.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -17,15 +16,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<Optional<User>> getUserByUsername(@PathVariable String username) {
-        Optional<User> user = userService.findUserByUsername(username);
-        return ResponseEntity.ok(user);
+    @GetMapping("/{id}")
+    public UserResponseDto getUserById(@PathVariable Long id) {
+        UserResponseDto user = userService.findUserById(id);
+        return user;
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User savedUser = userService.createUser(user);
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto user) {
+        UserResponseDto savedUser = userService.createUser(user);
         return ResponseEntity.ok(savedUser);
     }
 }
