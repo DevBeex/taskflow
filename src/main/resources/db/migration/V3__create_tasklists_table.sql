@@ -1,0 +1,6 @@
+CREATE TABLE tasklist (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    board_id BIGINT NOT NULL,
+    CONSTRAINT fk_board FOREIGN KEY (board_id) REFERENCES board (id) ON DELETE CASCADE
+);
