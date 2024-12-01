@@ -1,16 +1,17 @@
 package com.trello.trello.mapper;
 
 import com.trello.trello.dto.users.UserResponseDto;
+import com.trello.trello.dto.users.UserRequestDto;
 import com.trello.trello.model.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-import com.trello.trello.dto.users.UserRequestDto;
-@Mapper
+import org.mapstruct.Mapping;
+
+@Mapper(componentModel = "spring")
 public interface UserMapper {
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
-    // De UserRequestDto a User
+
+    // Ignora el campo "boards" ya que no está presente en el DTO
+    @Mapping(target = "boards", ignore = true)
     User toEntity(UserRequestDto userRequestDto);
 
-    // De User a UserResponseDto
     UserResponseDto toResponseDto(User user);
 }

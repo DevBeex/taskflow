@@ -3,6 +3,7 @@ package com.trello.trello.controller;
 import com.trello.trello.dto.users.UserRequestDto;
 import com.trello.trello.dto.users.UserResponseDto;
 import com.trello.trello.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +19,13 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserResponseDto getUserById(@PathVariable Long id) {
-        UserResponseDto user = userService.findUserById(id);
-        return user;
+        return userService.findUserById(id);
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto user) {
+    public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto user) {
         UserResponseDto savedUser = userService.createUser(user);
         return ResponseEntity.ok(savedUser);
     }
+
 }
