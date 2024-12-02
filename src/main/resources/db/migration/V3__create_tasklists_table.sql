@@ -1,4 +1,4 @@
-CREATE TABLE tasklist (
+CREATE TABLE "tasklist" (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     board_id BIGINT NOT NULL,
