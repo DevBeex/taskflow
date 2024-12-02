@@ -5,17 +5,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleGeneralException(Exception ex) {
         ApiResponse<Object> response = new ApiResponse<>(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                ex.getMessage(),
+                "Error: " + ex.getClass().getName() + " - " + ex.getMessage(),
                 null
         );
+        logger.error("Exception: ", ex); // Registrar stack trace completo
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 
@@ -37,5 +41,27 @@ public class GlobalExceptionHandler {
                 null
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(StackOverflowError.class)
+    public ResponseEntity<ApiResponse<Object>> handleStackOverflowError(StackOverflowError ex) {
+        ApiResponse<Object> response = new ApiResponse<>(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "A stack overflow occurred: " + ex.getMessage(),
+                null
+        );
+        ex.printStackTrace(); // Registrar el stack trace para depuración
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<ApiResponse<Object>> handleThrowable(Throwable ex) {
+        ApiResponse<Object> response = new ApiResponse<>(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "A critical error occurred: " + ex.getClass().getName() + " - " + ex.getMessage(),
+                null
+        );
+        logger.error("Critical error: ", ex);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 }

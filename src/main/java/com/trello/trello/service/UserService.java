@@ -35,9 +35,7 @@ public class UserService {
         if (userRepository.existsByEmail(userRequestDto.getEmail())) {
             throw new IllegalArgumentException(ErrorMessages.EMAIL_ALREADY_EXISTS);
         }
-        // Este es el problema
         User userEntity = userMapper.toEntity(userRequestDto);
-        // Al hacer el siguiente si se guarda el password
         userEntity.setPassword(PasswordUtil.hashPassword(userRequestDto.getPassword()));
         User savedUser = userRepository.save(userEntity);
         return userMapper.toResponseDto(savedUser);

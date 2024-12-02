@@ -9,8 +9,8 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "users" )
+public class User extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +27,15 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Board> boards;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Roles role;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    private Status status;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ActiveSession> activeSessions;
 }
