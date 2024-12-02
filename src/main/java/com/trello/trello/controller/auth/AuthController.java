@@ -1,5 +1,6 @@
 package com.trello.trello.controller.auth;
 
+import com.trello.trello.constants.ErrorMessages;
 import com.trello.trello.constants.JwtMessages;
 import com.trello.trello.dto.auth.JwtResponse;
 import com.trello.trello.dto.auth.LoginRequest;
@@ -25,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -35,7 +36,7 @@ public class AuthController {
             JwtResponse jwtResponse = new JwtResponse(jwt);
             return ResponseEntity.ok(jwtResponse);
         } catch (Exception ex) {
-            return ResponseEntity.badRequest().body(new JwtResponse(JwtMessages.INVALID));
+            return ResponseEntity.badRequest().body(new JwtResponse(ErrorMessages.USER_NOT_FOUND));
         }
     }
 }

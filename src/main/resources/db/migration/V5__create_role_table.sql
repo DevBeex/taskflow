@@ -1,5 +1,5 @@
 CREATE TABLE role(
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE role(
 );
 
 CREATE TABLE status (
-                          id SERIAL PRIMARY KEY,
+                          id BIGSERIAL PRIMARY KEY,
                           name VARCHAR(50) NOT NULL UNIQUE,
                           description VARCHAR(255),
                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE status (
 );
 
 CREATE TABLE active_sessions (
-                                 id SERIAL PRIMARY KEY,
+                                 id BIGSERIAL PRIMARY KEY,
                                  device_info VARCHAR(100) NOT NULL,
                                  token VARCHAR(500) NOT NULL,
                                  last_active TIMESTAMP NOT NULL,
