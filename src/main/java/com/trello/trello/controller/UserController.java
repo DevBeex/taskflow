@@ -1,4 +1,4 @@
-package com.trello.trello.controller.user;
+package com.trello.trello.controller;
 
 import com.trello.trello.dto.users.UserRequestDto;
 import com.trello.trello.dto.users.UserResponseDto;

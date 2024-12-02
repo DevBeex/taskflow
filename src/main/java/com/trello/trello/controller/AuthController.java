@@ -1,7 +1,5 @@
-package com.trello.trello.controller.auth;
+package com.trello.trello.controller;
 
-import com.trello.trello.constants.ErrorMessages;
-import com.trello.trello.constants.JwtMessages;
 import com.trello.trello.dto.auth.JwtResponse;
 import com.trello.trello.dto.auth.LoginRequest;
 import com.trello.trello.dto.response.ApiResponse;
