@@ -1,4 +1,4 @@
-CREATE TABLE roles(
+CREATE TABLE role(
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(255),
@@ -30,6 +30,6 @@ ALTER TABLE users
     ADD COLUMN status_id BIGINT NOT NULL,
     ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     ADD COLUMN updated_at TIMESTAMP,
-    ADD CONSTRAINT fk_user_role FOREIGN KEY (role_id) REFERENCES roles(id),
+    ADD CONSTRAINT fk_user_role FOREIGN KEY (role_id) REFERENCES role(id),
     ADD CONSTRAINT fk_user_status FOREIGN KEY (status_id) REFERENCES status(id);
 

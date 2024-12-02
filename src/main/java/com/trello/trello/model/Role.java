@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class Roles extends Auditable {
+public class Role extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
